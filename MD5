@@ -1,7 +1,7 @@
-6a193096780c5a7754a35ab564a985be *DESCRIPTION
+1e2cf97134c4d3427541117c380b6a24 *DESCRIPTION
 6822353c1488e71d808be624343c6c48 *LICENSE
 758036357f236ea6c89b043355574a76 *NAMESPACE
-9f7af9c6828d95bde1933874988dc09b *NEWS.md
+6bafdbff02582c2c958697cd48b42bfb *NEWS.md
 e9d466664b94fdc4b6c729030140c10c *R/as_html.R
 cd3afd84b7d2000fd1c888c5465ab466 *R/as_sass.R
 99f9ab6c486665bd7d57cc6f86ebd212 *R/compile.R
@@ -9,10 +9,10 @@ cd3afd84b7d2000fd1c888c5465ab466 *R/as_sass.R
 c50a9e2404ef7cfd6733038c52f209ac *R/options.R
 96293b7f05eff01ad07a8d7ced18ac1a *R/sass.R
 6b204562237de4edc88be9ece1fb654c *README.md
-92a8154c6117e7dc4d1ed9c5333e12b5 *build/vignette.rds
+e156c8cc190ec40cdcd889406f6175d7 *build/vignette.rds
 b945c02b9ab0fab03f8274f88d047ddf *inst/doc/sass.R
-376baa647500e232c2d685a8e4019687 *inst/doc/sass.Rmd
-c1fce62391201dc9dfa0f1da4cad6772 *inst/doc/sass.html
+cd7ca52349ac7e719de6ca478314742a *inst/doc/sass.Rmd
+f4edf36b72d6a591e7f4c3dd2d34481b *inst/doc/sass.html
 cf2f0fc89154d97ea58bcac8ddce454c *inst/sass-color/DESCRIPTION
 0eff65c5590f49167f5a2bb4f539f463 *inst/sass-color/README.md
 e3f2dc377bf3a1d35068022e35ec7f97 *inst/sass-color/app.R
@@ -281,4 +281,4 @@ e66a5c1e64f7c7548e4494a0bbb94220 *tests/testthat/test-unicode-var-expected.css
 ddc6ac642997e0a87863bde2f3f4e370 *tests/testthat/test-unicode.R
 6a84db16c7a16e5706d12f3328fb861a *tests/testthat/test-variables.R
 e021f5d17d14d29602365c8b2e0bbb17 *tests/testthat/test-variables.scss
-376baa647500e232c2d685a8e4019687 *vignettes/sass.Rmd
+cd7ca52349ac7e719de6ca478314742a *vignettes/sass.Rmd

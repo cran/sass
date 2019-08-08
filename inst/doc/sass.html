@@ -37,7 +37,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -315,13 +315,13 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h2>Variables</h2>
 <p>Sass variables are key to generating dynamic CSS, because they define the components of the styling that can be changed during compilation.</p>
 <p>It is best practice to define your <a href="http://sass-lang.com/guide#topic-2">variables</a> separately, and then <a href="http://sass-lang.com/guide#topic-5">import</a> them into the main Sass file. For example, we’ll define a color variable and use it to set the body’s background color.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb1-1" title="1"><span class="co">/* _variables.scss */</span></a>
-<a class="sourceLine" id="cb1-2" title="2">$color<span class="in">: #FFFFFF</span>;</a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb2-1" title="1"><span class="co">/* new-style.scss */</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="im">@import</span> <span class="st">&#39;variables&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb2-3" title="3">body {</a>
-<a class="sourceLine" id="cb2-4" title="4">  <span class="kw">background-color</span>: $color<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-5" title="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">/* _variables.scss */</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">$color<span class="in">:</span> <span class="pp">#FFFFFF</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">/* new-style.scss */</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="im">@import</span> <span class="st">'variables'</span>;</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">body {</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="kw">background-color</span>: $color;</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">}</a></code></pre></div>
 <p>The following <a href="https://gallery.shinyapps.io/sass-color">shiny app</a> will demonstrate this example. We’ll use Dean Attali’s <a href="https://github.com/daattali/colourpicker">colourpicker</a> to choose a color and write it to <code>_variables.scss</code>.</p>
 <p>Then the app compiles <code>new-style.scss</code> and renders the new style.</p>
 </div>
@@ -329,86 +329,86 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h2>Functions</h2>
 <p>If we choose a background color that is too dark, we won’t be able to read the title. Therefore, the font color must depend on the background color.</p>
 <p>Sass offers many <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#functions">built-in functions</a> that help with dynamic styling, and you can always write <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#function_directives">your own</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1"><span class="co">/* _variables.scss */</span></a>
-<a class="sourceLine" id="cb3-2" title="2">$color<span class="in">: #FFFFFF</span>;</a></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb4-1" title="1"><span class="co">/* new-style.scss */</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="im">@import</span> <span class="st">&#39;variables&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb4-3" title="3">body {</a>
-<a class="sourceLine" id="cb4-4" title="4">  <span class="kw">background-color</span>: $color<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-5" title="5">}</a>
-<a class="sourceLine" id="cb4-6" title="6"></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co">/* https://stackoverflow.com/a/3943023/6637133 */</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="im">@function</span> font-color<span class="fu">(</span>$color<span class="fu">)</span> {</a>
-<a class="sourceLine" id="cb4-9" title="9">  <span class="im">@return</span> if<span class="fu">(</span></a>
-<a class="sourceLine" id="cb4-10" title="10">    <span class="cn">red</span>($color<span class="fu">)</span> * <span class="dv">0.299</span> + green<span class="fu">(</span>$color<span class="fu">)</span> * <span class="dv">0.587</span> + blue<span class="fu">(</span>$color<span class="fu">)</span> * <span class="dv">0.114</span> &gt; <span class="dv">186</span>,</a>
-<a class="sourceLine" id="cb4-11" title="11">    <span class="cn">#000000</span>, <span class="cn">#ffffff</span></a>
-<a class="sourceLine" id="cb4-12" title="12">  )<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-13" title="13">}</a>
-<a class="sourceLine" id="cb4-14" title="14"></a>
-<a class="sourceLine" id="cb4-15" title="15">h1 {</a>
-<a class="sourceLine" id="cb4-16" title="16">  <span class="kw">color</span>: font-color<span class="fu">(</span>$color<span class="fu">)</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb4-17" title="17">}</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">/* _variables.scss */</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">$color<span class="in">:</span> <span class="pp">#FFFFFF</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">/* new-style.scss */</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="im">@import</span> <span class="st">'variables'</span>;</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">body {</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="kw">background-color</span>: $color;</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">/* https://stackoverflow.com/a/3943023/6637133 */</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="im">@function</span> font-color($color) {</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">  <span class="im">@return</span> if(</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">    red($color) * 0<span class="fu">.299</span> + green($color) * 0<span class="fu">.587</span> + blue($color) * 0<span class="fu">.114</span> &gt; 186,</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">    #000000, <span class="pp">#ffffff</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">  );</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">}</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">h1 {</a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">  <span class="kw">color</span>: font-color($color);</a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">}</a></code></pre></div>
 <p>In this <a href="https://gallery.shinyapps.io/sass-font/">shiny example app</a>, the font color now <a href="https://stackoverflow.com/a/3943023/6637133">depends</a> on the background color, switching between black and white as necessary.</p>
 </div>
 <div id="resizing" class="section level2">
 <h2>Resizing</h2>
 <p>Since Sass is fully CSS compatible, any styling option is available, including dimensions like height and width.</p>
 <p>In this <a href="https://gallery.shinyapps.io/sass-size/">example app</a> we’ll change the width of the image based on a slider:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb5-1" title="1"><span class="co">/* _variables.scss */</span></a>
-<a class="sourceLine" id="cb5-2" title="2">$color<span class="in">: #FFFFFF</span>;</a>
-<a class="sourceLine" id="cb5-3" title="3">$width<span class="in">: 100;</span></a></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb6-1" title="1"><span class="co">/* new-style.scss */</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="im">@import</span> <span class="st">&#39;variables&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-3" title="3">body {</a>
-<a class="sourceLine" id="cb6-4" title="4">  <span class="kw">background-color</span>: $color<span class="op">;</span></a>
-<a class="sourceLine" id="cb6-5" title="5">}</a>
-<a class="sourceLine" id="cb6-6" title="6"></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="er">// https://stackoverflow.com/a/3943023/6637133</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="im">@function</span> font-color<span class="fu">(</span>$color<span class="fu">)</span> {</a>
-<a class="sourceLine" id="cb6-9" title="9">  <span class="im">@return</span> if<span class="fu">(</span></a>
-<a class="sourceLine" id="cb6-10" title="10">    <span class="cn">red</span>($color<span class="fu">)</span> * <span class="dv">0.299</span> + green<span class="fu">(</span>$color<span class="fu">)</span> * <span class="dv">0.587</span> + blue<span class="fu">(</span>$color<span class="fu">)</span> * <span class="dv">0.114</span> &gt; <span class="dv">186</span>,</a>
-<a class="sourceLine" id="cb6-11" title="11">    <span class="cn">#000000</span>, <span class="cn">#ffffff</span></a>
-<a class="sourceLine" id="cb6-12" title="12">  )<span class="op">;</span></a>
-<a class="sourceLine" id="cb6-13" title="13">}</a>
-<a class="sourceLine" id="cb6-14" title="14"></a>
-<a class="sourceLine" id="cb6-15" title="15">h1 {</a>
-<a class="sourceLine" id="cb6-16" title="16">  <span class="kw">color</span>: font-color<span class="fu">(</span>$color<span class="fu">)</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-17" title="17">}</a>
-<a class="sourceLine" id="cb6-18" title="18"></a>
-<a class="sourceLine" id="cb6-19" title="19"><span class="fu">.shiny-plot-output</span> {</a>
-<a class="sourceLine" id="cb6-20" title="20">  <span class="kw">max-width</span>: percentage<span class="fu">(</span>$width / <span class="dv">100</span><span class="fu">)</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-21" title="21">}</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">/* _variables.scss */</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">$color<span class="in">:</span> <span class="pp">#FFFFFF</span>;</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">$width<span class="in">:</span> 100;</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">/* new-style.scss */</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="im">@import</span> <span class="st">'variables'</span>;</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">body {</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">  <span class="kw">background-color</span>: $color;</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">// https<span class="in">:</span>//stackoverflow<span class="fu">.com</span>/a/3943023/6637133</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="im">@function</span> font-color($color) {</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">  <span class="im">@return</span> if(</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">    red($color) * 0<span class="fu">.299</span> + green($color) * 0<span class="fu">.587</span> + blue($color) * 0<span class="fu">.114</span> &gt; 186,</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">    #000000, <span class="pp">#ffffff</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">  );</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">}</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">h1 {</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">  <span class="kw">color</span>: font-color($color);</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">}</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="fu">.shiny-plot-output</span> {</a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">  <span class="kw">max-width</span>: percentage($width / <span class="dv">100</span>);</a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">}</a></code></pre></div>
 </div>
 <div id="css-formatting" class="section level2">
 <h2>CSS Formatting</h2>
 <p>Sass can also format the CSS output with different indentation styles.</p>
 <p>Here we’ll convert the readable Sass to minified CSS.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">new_style &lt;-<span class="st"> &quot;</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="st">  $color: #FFFFFF;</span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="st">  $width: 100;</span></a>
-<a class="sourceLine" id="cb7-4" title="4"></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="st">  body {</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="st">    background-color: $color;</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="st">  }</span></a>
-<a class="sourceLine" id="cb7-8" title="8"></a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="st">  // https://stackoverflow.com/a/3943023/6637133</span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="st">  @function font-color($color) {</span></a>
-<a class="sourceLine" id="cb7-11" title="11"><span class="st">    @return if(</span></a>
-<a class="sourceLine" id="cb7-12" title="12"><span class="st">      red($color) * 0.299 + green($color) * 0.587 + blue($color) * 0.114 &gt; 186,</span></a>
-<a class="sourceLine" id="cb7-13" title="13"><span class="st">      #000000, #ffffff</span></a>
-<a class="sourceLine" id="cb7-14" title="14"><span class="st">    );</span></a>
-<a class="sourceLine" id="cb7-15" title="15"><span class="st">  }</span></a>
-<a class="sourceLine" id="cb7-16" title="16"></a>
-<a class="sourceLine" id="cb7-17" title="17"><span class="st">  h1 {</span></a>
-<a class="sourceLine" id="cb7-18" title="18"><span class="st">    color: font-color($color);</span></a>
-<a class="sourceLine" id="cb7-19" title="19"><span class="st">  }</span></a>
-<a class="sourceLine" id="cb7-20" title="20"></a>
-<a class="sourceLine" id="cb7-21" title="21"><span class="st">  .shiny-plot-output {</span></a>
-<a class="sourceLine" id="cb7-22" title="22"><span class="st">    max-width: percentage($width / 100);</span></a>
-<a class="sourceLine" id="cb7-23" title="23"><span class="st">  }</span></a>
-<a class="sourceLine" id="cb7-24" title="24"><span class="st">&quot;</span></a></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">library</span>(sass)</a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="kw">sass</span>(new_style, <span class="dt">options =</span> <span class="kw">sass_options</span>(<span class="dt">output_style =</span> <span class="st">&quot;compressed&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">new_style &lt;-<span class="st"> &quot;</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  $color: #FFFFFF;</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  $width: 100;</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  body {</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="st">    background-color: $color;</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="st">  }</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="st">  // https://stackoverflow.com/a/3943023/6637133</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="st">  @function font-color($color) {</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="st">    @return if(</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="st">      red($color) * 0.299 + green($color) * 0.587 + blue($color) * 0.114 &gt; 186,</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="st">      #000000, #ffffff</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="st">    );</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="st">  }</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="st">  h1 {</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="st">    color: font-color($color);</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="st">  }</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="st">  .shiny-plot-output {</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="st">    max-width: percentage($width / 100);</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="st">  }</span></a>
+<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="st">&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">library</span>(sass)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">sass</span>(new_style, <span class="dt">options =</span> <span class="kw">sass_options</span>(<span class="dt">output_style =</span> <span class="st">&quot;compressed&quot;</span>))</a></code></pre></div>
 body{background-color:#fff}h1{color:#000}.shiny-plot-output{max-width:100%}
 
 </div>
