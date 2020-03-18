@@ -1,45 +1,66 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  message = FALSE,
+  fig.align = "center",
+  out.width = "80%",
+  class.output = "css",
+  comment = ""
 )
 
-## ----echo = FALSE--------------------------------------------------------
-knitr::include_app("https://gallery.shinyapps.io/sass-color", height = "600px")
-
-## ----echo = FALSE--------------------------------------------------------
-knitr::include_app("https://gallery.shinyapps.io/sass-font/", height = "400px")
-
-## ----echo = FALSE--------------------------------------------------------
-knitr::include_app("https://gallery.shinyapps.io/sass-size/", height = "600px")
-
-## ------------------------------------------------------------------------
-new_style <- "
-  $color: #FFFFFF;
-  $width: 100;
-
-  body {
-    background-color: $color;
-  }
-
-  // https://stackoverflow.com/a/3943023/6637133
-  @function font-color($color) {
-    @return if(
-      red($color) * 0.299 + green($color) * 0.587 + blue($color) * 0.114 > 186,
-      #000000, #ffffff
-    );
-  }
-
-  h1 {
-    color: font-color($color);
-  }
-
-  .shiny-plot-output {
-    max-width: percentage($width / 100);
-  }
-"
-
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(sass)
-sass(new_style, options = sass_options(output_style = "compressed"))
+variable <- "$body-bg: red;"
+rule <- "body { background-color: $body-bg; }"
+sass(input = list(variable, rule))
+
+## -----------------------------------------------------------------------------
+user_default <- list("body-bg" = "blue !default")
+default <- list("body-bg" = "red !default")
+sass(input = list(user_default, default, rule))
+
+## -----------------------------------------------------------------------------
+variable <- list("body-bg" = "rgba(black, 0.8)")
+sass(input = list(variable, rule))
+
+## -----------------------------------------------------------------------------
+sass(
+  list(
+    variable,
+    sass_file("color-contrast.scss"),
+    "body { 
+      background-color: $body-bg;
+      color: color-contrast($body-bg); 
+    }"
+  )
+)
+
+## ---- eval=FALSE, ref.label='bs_sass'-----------------------------------------
+#  NA
+
+## ---- echo = FALSE, out.width='50%'-------------------------------------------
+knitr::include_graphics('my-style.png')
+
+## -----------------------------------------------------------------------------
+layer1 <- sass_layer(
+  defaults = list("body-bg" = "white !default"),
+  declarations = sass_file("color-contrast.scss"),
+  rules = "body{background-color: $body-bg; color: color-contrast($body-bg)}"
+)
+sass(layer1)
+
+## -----------------------------------------------------------------------------
+layer2 <- sass_layer(
+  defaults = list("body-bg" = "white !default")
+)
+sass(sass_layer_merge(layer1, layer2))
+
+## -----------------------------------------------------------------------------
+sass(
+  sass_file("my-style.scss"),
+  options = sass_options(output_style = "compressed")
+)
+
+## ---- echo = FALSE------------------------------------------------------------
+knitr::include_graphics("https://i.imgur.com/5cUEifg.gif")
 

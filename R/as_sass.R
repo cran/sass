@@ -67,7 +67,7 @@ as_sass_.NULL <- function(input) {
   "null"
 }
 as_sass_.numeric <- function(input) {
-  input
+  as.character(input)
 }
 as_sass_.logical <- function(input) {
   if (input) {
@@ -105,9 +105,19 @@ as_sass_.list <- function(input) {
   paste0("$", input_names, ": ", input_values, ";", collapse = "\n")
 }
 
+as_sass_.sass_layer <- function(input) {
+  as_sass_(list(input$defaults, input$declarations, input$rules))
+}
+
 as_sass_.character <- function(input) {
-  # treat like sass text input
-  return(input)
+  if (any(nchar(rlang::names2(input)) > 0)) {
+    warning(
+      "Character vector names are ignored. ",
+      "Instead of a named character vector, use a named list to define Sass variables.",
+      call. = FALSE
+    )
+  }
+  paste(input, collapse = "\n")
 }
 
 #' Sass Import
@@ -129,7 +139,10 @@ as_sass_.character <- function(input) {
 #' sass_import("foo")
 #' sass_import("$foo", FALSE)
 #' \donttest{
-#' sass_file("foo.scss")
+#' tmp_scss_file <- tempfile(fileext = ".scss")
+#' writeLines("$color: red; body{ color: $color; }", tmp_scss_file)
+#' sass_file(tmp_scss_file)
+#' sass(sass_file(tmp_scss_file))
 #' }
 sass_import <- function(input, quote = TRUE) {
   quote_val <- (if (isTRUE(quote)) "\"" else "")
