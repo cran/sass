@@ -1,12 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# sass <a href="https://sass-lang.com"><img src="man/figures/icon.svg" align="right" height = 150 style="background-color: white; padding-left: 20px;"/></a>
+# sass <a href='https://rstudio.github.io/sass/'><img src='man/figures/logo.svg' align="right" height="139" /></a>
 
-[![Travis build
-status](https://travis-ci.org/rstudio/sass.svg?branch=master)](https://travis-ci.org/rstudio/sass)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/rstudio/sass?branch=master&svg=true)](https://ci.appveyor.com/project/rstudio/sass)
+[![R build status](https://github.com/rstudio/sass/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/sass/actions)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/sass)](https://cran.r-project.org/package=sass)
 
 <style>

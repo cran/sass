@@ -1,7 +1,7 @@
 context("compile")
 
 # Disable sass cache
-options(sass.cache = FALSE)
+local_disable_cache()
 
 test_that(".scss file compiles", {
   expected <- "foo {\n  margin: 36.6px;\n}\n\nbar {\n  margin: 63px;\n}\n"
@@ -48,4 +48,16 @@ test_that("sass compiles", {
     sass(sass_file("test-compile.sass"), sass_options(indented_syntax = TRUE)),
     expected
   )
+})
+
+
+test_that("sass_partial() and sass() arguments match", {
+  s <- formals(sass)
+  s$input <- NULL
+
+  sp <- formals(sass_partial)
+  sp$rules <- NULL
+  sp$bundle <- NULL
+
+  expect_identical(s, sp)
 })

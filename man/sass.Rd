@@ -8,56 +8,157 @@ sass(
   input = NULL,
   options = sass_options(),
   output = NULL,
-  cache_options = sass_cache_options(),
-  write_attachments = NA
+  write_attachments = NA,
+  cache = sass_cache_get(),
+  cache_key_extra = NULL
 )
 }
 \arguments{
-\item{input}{Accepts raw Sass, a named list of variables, or a list of raw Sass and/or named variables.
-See \code{\link{as_sass}} and \code{\link{sass_import}} / \code{\link{sass_file}} for more details.}
+\item{input}{Accepts raw Sass, a named list of variables, a list of raw Sass
+and/or named variables, or a \code{\link[=sass_layer]{sass_layer()}} object. See \code{\link[=as_sass]{as_sass()}} and
+\code{\link[=sass_import]{sass_import()}} / \code{\link[=sass_file]{sass_file()}} for more details.}
 
 \item{options}{Compiler options for Sass. Please specify options using
-\code{\link{sass_options}}.}
+\code{\link[=sass_options]{sass_options()}}.}
 
-\item{output}{Specifies path to output file for compiled CSS.}
+\item{output}{Specifies path to output file for compiled CSS. May be a
+character string or \code{\link[=output_template]{output_template()}}}
 
-\item{cache_options}{Caching options for Sass. Please specify options using
-\code{\link{sass_cache_options}}. Caching is turned off by default for
-interactive R sessions, and turned on for non-interactive ones.}
+\item{write_attachments}{If the input contains \code{\link[=sass_layer]{sass_layer()}} objects that
+have file attachments, and \code{output} is not \code{NULL}, then copy the file
+attachments to the directory of \code{output}. (Defaults to \code{NA}, which merely
+emits a warning if file attachments are present, but does not write them to
+disk; the side-effect of writing extra files is subtle and potentially
+destructive, as files may be overwritten.)}
 
-\item{write_attachments}{If the input contains \code{\link{sass_layer}}
-objects that have file attachments, and \code{output} is not \code{NULL},
-then copy the file attachments to the directory of \code{output}. (Defaults
-to \code{NA}, which merely emits a warning if file attachments are present,
-but does not write them to disk; the side-effect of writing extra files is
-subtle and potentially destructive, as files may be overwritten.)}
+\item{cache}{This can be a directory to use for the cache, a \link{FileCache}
+object created by \code{\link[=sass_file_cache]{sass_file_cache()}}, or \code{FALSE} or \code{NULL} for no caching.}
+
+\item{cache_key_extra}{additional information to considering when computing
+the cache key. This should include any information that could possibly
+influence the resulting CSS that isn't already captured by \code{input}. For
+example, if \code{input} contains something like \code{"@import sass_file.scss"} you
+may want to include the \code{\link[=file.mtime]{file.mtime()}} of \code{sass_file.scss} (or, perhaps, a
+\code{\link[=packageVersion]{packageVersion()}} if \code{sass_file.scss} is bundled with an R package).}
 }
 \value{
-If \code{output = NULL}, the function returns a string value
-  of the compiled CSS. If the output path is specified, the compiled
-  CSS is written to that file and \code{invisible()} is returned.
+If \code{output = NULL}, the function returns a string value of the
+compiled CSS. If \code{output} is specified, the compiled CSS is written to a
+file and the filename is returned.
 }
 \description{
 Compile Sass to CSS using LibSass.
 }
+\section{Caching}{
+
+
+By default, caching is enabled, meaning that \code{sass()} avoids the possibly
+expensive re-compilation of CSS whenever the same \code{options} and \code{input} are
+requested. Unfortunately, in some cases, \code{options} and \code{input} alone aren't
+enough to determine whether new CSS output must be generated. For example,
+changes in local file
+\href{https://sass-lang.com/documentation/at-rules/import}{imports} that aren't
+captured through \code{\link[=sass_file]{sass_file()}}/\code{\link[=sass_import]{sass_import()}}, may lead to a
+false-positive cache hit. For this reason, developers are encouraged to
+capture such information in \code{cache_key_extra} (possibly with
+\code{packageVersion('myPackage')} if shipping Sass with a package), and users
+may want to disable caching altogether during local development by calling
+\code{options(sass.cache=FALSE)}.
+
+In some cases when developing and modifying .scss files, \code{\link[=sass]{sass()}} might not
+detect changes, and keep using cached .css files instead of rebuilding
+them. To be safe, if you are developing a theme with sass, it's best to
+turn off caching by calling \code{options(sass.cache=FALSE)}.
+
+If caching is enabled, \code{\link[=sass]{sass()}} will attempt to bypass the compilation
+process by reusing output from previous \code{\link[=sass]{sass()}} calls that used equivalent
+inputs. This mechanism works by computing a \emph{cache key} from each \code{\link[=sass]{sass()}}
+call's \code{input}, \code{option}, and \code{cache_key_extra} arguments. If an object
+with that hash already exists within the cache directory, its contents are
+used instead of performing the compilation. If it does not exist, then
+compilation is performed and usual and the results are stored in the cache.
+
+If a file that is included using \code{\link[=sass_file]{sass_file()}} changes on disk (i.e. its
+last-modified time changes), its previous cache entries will effectively be
+invalidated (not removed from disk, but they'll no longer be matched).
+However, if a file imported using \code{\link[=sass_file]{sass_file()}} itself imports other sass
+files using \code{@import}, changes to those files are invisible to the
+cache and you can end up with stale results. To avoid this problem when
+developing sass code, it's best to disable caching with
+\code{options(sass.cache=FALSE)}.
+
+By default, the maximum size of the cache is 40 MB. If it grows past that
+size, the least-recently-used objects will be evicted from the cache to
+keep it under that size. Also by default, the maximum age of objects in the
+cache is one week. Older objects will be evicted from the cache.
+
+To clear the default cache, call \code{sass_cache_get()$reset()}.
+}
+
 \examples{
-# raw Sass input
+# Raw Sass input
 sass("foo { margin: 122px * .3; }")
 
-# list of inputs, including named variables
+# List of inputs, including named variables
 sass(list(
   list(width = "122px"),
   "foo { margin: $width * .3; }"
 ))
 
-# import a file
+# Compile a .scss file
+example_file <- system.file("examples/example-full.scss", package = "sass")
+sass(sass_file(example_file))
+
+# Import a file
 tmp_file <- tempfile()
 writeLines("foo { margin: $width * .3; }", tmp_file)
 sass(list(
   list(width = "122px"),
   sass_file(tmp_file)
 ))
+
+\dontrun{
+# ======================
+# Caching examples
+# ======================
+# Very slow to compile
+fib_sass <- "@function fib($x) {
+  @if $x <= 1 {
+    @return $x
+  }
+  @return fib($x - 2) + fib($x - 1);
+}
+
+body {
+  width: fib(27);
+}"
+
+# The first time this runs it will be very slow
+system.time(sass(fib_sass))
+
+# But on subsequent calls, it should be very fast
+system.time(sass(fib_sass))
+
+# sass() can be called with cache=NULL; it will be slow
+system.time(sass(fib_sass, cache = NULL))
+
+# Clear the cache
+sass_cache_get()$reset()
+}
+
+\dontrun{
+# Example of disabling cache by setting the default cache to NULL.
+
+# Disable the default cache (save the original one first, so we can restore)
+old_cache <- sass_cache_get()
+sass_cache_set(NULL)
+# Will be slow, because no cache
+system.time(sass(fib_sass))
+
+# Restore the original cache
+sass_cache_set(old_cache)
+}
 }
 \seealso{
-\url{http://sass-lang.com/guide}
+\url{https://sass-lang.com/guide}
 }

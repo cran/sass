@@ -28,9 +28,9 @@ sass(
   list(
     variable,
     sass_file("color-contrast.scss"),
-    "body { 
+    "body {
       background-color: $body-bg;
-      color: color-contrast($body-bg); 
+      color: color-contrast($body-bg);
     }"
   )
 )
@@ -53,7 +53,7 @@ sass(layer1)
 layer2 <- sass_layer(
   defaults = list("body-bg" = "white !default")
 )
-sass(sass_layer_merge(layer1, layer2))
+sass(sass_bundle(layer1, layer2))
 
 ## -----------------------------------------------------------------------------
 sass(
