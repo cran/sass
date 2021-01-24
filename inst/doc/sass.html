@@ -262,10 +262,10 @@ rule &lt;- &quot;body { background-color: $body-bg; }&quot;
 sass(input = list(variable, rule))
 </code></pre>
 
-<pre><code class="css">body {
+<p>&lt;!&ndash;html_preserve&ndash;&gt;<style>body {
   background-color: red;
 }
-</code></pre>
+</style>&lt;!&ndash;/html_preserve&ndash;&gt;</p>
 
 <p>A more convenient and readable way to create Sass variables in R is to use a named <code>list()</code>. Also, it&#39;s a good idea to add the <code>!default</code> flag after the value since it provides users of your Sass an opportunity to set their own value. We&#39;ll learn more about defaults in <a href="#layering">layering</a>, but for now, just note that the <code>!default</code> flag says use this value only if that variable isn&#39;t already defined:</p>
 
@@ -274,10 +274,10 @@ default &lt;- list(&quot;body-bg&quot; = &quot;red !default&quot;)
 sass(input = list(user_default, default, rule))
 </code></pre>
 
-<pre><code class="css">body {
+<p>&lt;!&ndash;html_preserve&ndash;&gt;<style>body {
   background-color: blue;
 }
-</code></pre>
+</style>&lt;!&ndash;/html_preserve&ndash;&gt;</p>
 
 <h3>Functions {#functions}</h3>
 
@@ -287,10 +287,10 @@ sass(input = list(user_default, default, rule))
 sass(input = list(variable, rule))
 </code></pre>
 
-<pre><code class="css">body {
+<p>&lt;!&ndash;html_preserve&ndash;&gt;<style>body {
   background-color: rgba(0, 0, 0, 0.8);
 }
-</code></pre>
+</style>&lt;!&ndash;/html_preserve&ndash;&gt;</p>
 
 <p>Sass also provides the ability to define your own functions through the <a href="https://sass-lang.com/documentation/at-rules/function"><code>@function</code> at-rule</a>. Like functions in most languages, there are four main components to a function definition: (1) the function <code>name</code>, (2) the function argument/inputs (e.g., <code>arg1</code>, <code>arg2</code>), (3) the function body which contains statements (i.e., <code>statement1</code>, <code>statement2</code>, etc.), and finally (4) a return <code>value</code>.</p>
 
@@ -329,11 +329,11 @@ sass(input = list(variable, rule))
 )
 </code></pre>
 
-<pre><code class="css">body {
+<p>&lt;!&ndash;html_preserve&ndash;&gt;<style>body {
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
 }
-</code></pre>
+</style>&lt;!&ndash;/html_preserve&ndash;&gt;</p>
 
 <p><strong>NOTE</strong>: <a href="https://getbootstrap.com/docs/4.0/getting-started/theming/">Bootstrap 4 Sass</a> provides it&#39;s own color contrasting function, named <code>color-yiq()</code>, which does essentially the same thing as <code>color-contrast()</code>, and is easy to use via <code>bootstrap_sass()</code> function the <strong>bslib</strong> package (this function automatically imports Bootstrap&#39;s variables, functions, and mixins):</p>
 
@@ -376,11 +376,11 @@ Technically speaking, mixins are similar to functions in that they require a <co
 sass(layer1)
 </code></pre>
 
-<pre><code class="css">body {
+<p>&lt;!&ndash;html_preserve&ndash;&gt;<style>body {
   background-color: white;
   color: black;
 }
-</code></pre>
+</style>&lt;!&ndash;/html_preserve&ndash;&gt;</p>
 
 <p>This allows downstream <code>sass_layer()</code>s to be <code>sass_bundle()</code>d into a single layer, where those downstream layers are granted higher priority. More specifically, this means:</p>
 
@@ -408,11 +408,11 @@ sass(layer1)
 sass(sass_bundle(layer1, layer2))
 </code></pre>
 
-<pre><code class="css">body {
+<p>&lt;!&ndash;html_preserve&ndash;&gt;<style>body {
   background-color: white;
   color: black;
 }
-</code></pre>
+</style>&lt;!&ndash;/html_preserve&ndash;&gt;</p>
 
 <h3>Resolving relative imports {#imports-relative}</h3>
 
@@ -456,8 +456,8 @@ sass(sass_bundle(layer1, layer2))
 )
 </code></pre>
 
-<pre><code class="css">body{background-color:red}
-</code></pre>
+<p>&lt;!&ndash;html_preserve&ndash;&gt;<style>body{background-color:red}
+</style>&lt;!&ndash;/html_preserve&ndash;&gt;</p>
 
 <h3>Source maps {#source-maps}</h3>
 

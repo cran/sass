@@ -1,7 +1,7 @@
-a559cbc2f2caf404efdb14eed2fe1589 *DESCRIPTION
+88d55bdb92296f1cd5f8691653f6dd6a *DESCRIPTION
 6822353c1488e71d808be624343c6c48 *LICENSE
 39afcfd4e00a55643ca56ddd0741de59 *NAMESPACE
-2d8697e21e743b6a5e6ad8d18705cbf4 *NEWS.md
+2ffa909ac88d7ae4f752460072d4ae8f *NEWS.md
 e9d466664b94fdc4b6c729030140c10c *R/as_html.R
 c422460047337b9acc06970a5f381cde *R/as_sass.R
 99f9ab6c486665bd7d57cc6f86ebd212 *R/compile.R
@@ -11,14 +11,14 @@ bc55d86876e3e280a81c1faa7c910a9b *R/file_cache.R
 5be4c4838fe36d48d8f7dc9b3c9f29e0 *R/layers.R
 eff093aa3c8dca2b16453af917852a77 *R/options.R
 d4f8b4f48de80adcf75717ce369ddfed *R/sass.R
-cedda52002b0dcdf68201bd0ab9d2509 *R/sass_cache.R
+e3a0f36bf549659ac55620a0070c4864 *R/sass_cache.R
 9a740556e85fb89334e098a52c9b3440 *R/shiny_devmode.R
 bfd44d80f27ce9d5a92f06bb611c361a *R/utils.R
 d398c1c0d7631fe46b1c42b11f112c41 *README.md
 f7c3327de03ddb32301a909c23b6dd7b *build/vignette.rds
 04d9f1b89d78b5a16d3d5dea10eda45e *inst/doc/sass.R
 7437ae9755601747d17feae1601cf83b *inst/doc/sass.Rmd
-800cf921dbbca8ee09cb9abbb7a2d2ed *inst/doc/sass.html
+db6dfbf7cda773017a14be4ea93e2446 *inst/doc/sass.html
 eb75893d9dd425f54bf204f1e3cb59f5 *inst/examples/example-full.scss
 65dd49a134f546695cd693e320d3d294 *inst/examples/rules.scss
 df7fd1bc7e3dc7b461400d0c5d88ed81 *inst/examples/variables.scss
@@ -50,7 +50,7 @@ cff4557946eecaf29d777ae777c5c5ca *man/figures/sass-color.gif
 a3bc7250f5317ee48cb98fb71ae04e2f *man/sass-deprecated.Rd
 c69738df7e270da55d38614f4ef63d3f *man/sass.Rd
 c296cf7807fd9758593189b03865e207 *man/sass_cache_context_dir.Rd
-c4b78c1020d2849caf750b3ca9768935 *man/sass_cache_get.Rd
+b4938259ba0f4235e77f4416e2b38171 *man/sass_cache_get.Rd
 c3511ef317c071d8ff69d52bcce8a23f *man/sass_cache_get_dir.Rd
 e338af47c74e416d1a1be19325bde1be *man/sass_cache_options.Rd
 13a499ec79b6564e19f430d31388f07a *man/sass_file_cache.Rd
