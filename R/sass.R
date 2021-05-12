@@ -34,7 +34,7 @@
 #'   last-modified time changes), its previous cache entries will effectively be
 #'   invalidated (not removed from disk, but they'll no longer be matched).
 #'   However, if a file imported using [sass_file()] itself imports other sass
-#'   files using \code{@import}, changes to those files are invisible to the
+#'   files using `@import`, changes to those files are invisible to the
 #'   cache and you can end up with stale results. To avoid this problem when
 #'   developing sass code, it's best to disable caching with
 #'   `options(sass.cache=FALSE)`.
@@ -47,11 +47,8 @@
 #'   To clear the default cache, call `sass_cache_get()$reset()`.
 #'
 #'
-#' @param input Accepts raw Sass, a named list of variables, a list of raw Sass
-#'   and/or named variables, or a [sass_layer()] object. See [as_sass()] and
-#'   [sass_import()] / [sass_file()] for more details.
-#' @param options Compiler options for Sass. Please specify options using
-#'   [sass_options()].
+#' @inheritParams as_sass
+#' @param options Compiler [sass_options()].
 #' @param output Specifies path to output file for compiled CSS. May be a
 #'   character string or [output_template()]
 #' @param write_attachments If the input contains [sass_layer()] objects that
@@ -140,7 +137,7 @@
 #' }
 sass <- function(
   input = NULL,
-  options = sass_options(),
+  options = sass_options_get(),
   output = NULL,
   write_attachments = NA,
   cache = sass_cache_get(),
@@ -169,11 +166,17 @@ sass <- function(
   css <- NULL
   layer <- extract_layer(input)
   sass_input <- as_sass(input)
+  html_deps <- htmlDependencies(sass_input)
 
   # If caching is active, compute the hash key
   cache_key <- if (!is.null(cache)) {
     sass_hash(list(
-      sass_input, options, cache_key_extra,
+      # Don't include htmlDependency()s in cache key since they:
+      # 1. Are always attached to the return value of sass()
+      # 2. Generally won't invalidate Sass->CSS compilation
+      # 3. May include a temp directory
+      discard_dependencies(input),
+      options, cache_key_extra,
       # Detect if any attachments have changed
       if (is_sass_layer(layer) && !is.null(layer$file_attachments)) get_file_mtimes(layer$file_attachments)
     ))
@@ -199,10 +202,10 @@ sass <- function(
       cache_hit <- cache$get_file(cache_key, outfile = output)
       if (cache_hit) {
         if (isTRUE(write_attachments == FALSE)) {
-          return(output)
+          return(attachDependencies(output, html_deps))
         }
         maybe_write_attachments(layer, output, write_attachments)
-        return(output)
+        return(attachDependencies(output, html_deps))
       }
     }
 
@@ -229,16 +232,14 @@ sass <- function(
   if (!is.null(output)) {
     write_utf8(css, output)
     maybe_write_attachments(layer, output, write_attachments)
-    return(output)
+    return(
+      attachDependencies(output, html_deps)
+    )
   }
 
   # Attach HTML dependencies so that placing a sass::sass() call within HTML tags
   # will include the dependencies
-  if (is_sass_layer(layer)) {
-    css <- htmltools::attachDependencies(css, layer$html_deps)
-  }
-
-  css
+  attachDependencies(css, html_deps)
 }
 
 
@@ -271,7 +272,7 @@ sass <- function(
 sass_partial <- function(
   rules,
   bundle,
-  options = sass_options(),
+  options = sass_options_get(),
   output = NULL,
   write_attachments = NA,
   cache = sass_cache_get(),
@@ -296,12 +297,13 @@ sass_partial <- function(
 #' that new redundant file(s) aren't generated on a [sass()] cache hit, and that
 #' the file's extension is suitable for the [sass_options()]'s `output_style`.
 #'
-#' @param basename a non-empty character vector giving the outfile name (without
+#' @param basename a non-empty character string giving the outfile name (without
 #'   the extension).
-#' @param dirname a non-empty character vector giving the initial part of the
+#' @param dirname a non-empty character string giving the initial part of the
 #'   directory name.
 #' @param fileext the output file extension. The default is `".min.css"` for
 #'   compressed and compact output styles; otherwise, its `".css"`.
+#' @param path the output file's root directory path.
 #'
 #' @return A function with two arguments: `options` and `suffix`. When called inside
 #' [sass()] with caching enabled, the caching key is supplied to `suffix`.
@@ -313,15 +315,15 @@ sass_partial <- function(
 #' func <- output_template(basename = "foo", dirname = "bar-")
 #' func(suffix = "baz")
 #'
-output_template <- function(basename = "sass", dirname = basename, fileext = NULL) {
+output_template <- function(basename = "sass", dirname = basename, fileext = NULL, path = tempdir()) {
   function(options = list(), suffix = NULL) {
     fileext <- fileext %||% if (isTRUE(options$output_style %in% c(2, 3))) ".min.css" else ".css"
     # If caching is enabled, then make sure the out dir is unique to the cache key;
     # otherwise, do the more conservative thing of making sure there is a fresh start everytime
     out_dir <- if (is.null(suffix)) {
-      tempfile(pattern = dirname)
+      tempfile(tmpdir = path, pattern = dirname)
     } else {
-      file.path(tempdir(), paste0(dirname, suffix))
+      file.path(path, paste0(dirname, suffix))
     }
     if (!dir.exists(out_dir)) {
       dir.create(out_dir, recursive = TRUE)

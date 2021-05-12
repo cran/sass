@@ -1,22 +1,16 @@
-#' List to Sass converter
+#' Convert an R object into Sass code
 #'
 #' Converts multiple types of inputs to a single Sass input string for
-#' \code{\link{sass}}.
+#' [sass()].
 #'
-#' Note that the LibSass compiler expects .sass files to use the Sass Indented
-#' Syntax.
+#' @param input Any of the following:
+#'   * A character vector containing Sass code.
+#'   * A named list containing variable names and values.
+#'   * A [sass_file()], [sass_layer()], and/or [sass_bundle()].
+#'   * A [list()] containing any of the above.
 #'
-#' @param input Either a
-#' \itemize{
-#'   \item raw Sass string
-#'   \item named list containing variable names and values
-#'   \item Sass-like file name.
-#'
-#' }
-#' @seealso Visit
-#'   \url{https://sass-lang.com/documentation/file.SASS_REFERENCE.html#import}
-#'   for more details.
-#' @return a single character value to be supplied to \code{\link{sass}}
+#' @references <https://sass-lang.com/documentation/file.SASS_REFERENCE.html#import>
+#' @return a single character value to be supplied to [sass()].
 #' @export
 #' @examples
 #' # Example of regular Sass input
@@ -52,7 +46,51 @@
 #' sass(input)
 #' }
 as_sass <- function(input) {
-  as_html(as_sass_(input), "sass")
+  attachDependencies(
+    as_html(as_sass_(input), "sass"),
+    find_dependencies(input)
+  )
+}
+
+find_dependencies <- function(x) {
+
+  deps <- if (is_sass_bundle_like(x)) {
+    x <- as_sass_layer(x)
+    deps <- x$html_deps
+    x$html_deps <- NULL
+    deps
+  } else if (is_font_collection(x)) {
+    x$html_deps
+  } else {
+    htmlDependencies(x)
+  }
+  childDeps <- NULL
+  # only recurse into generic lists
+  if (is.list(x)) {
+    childDeps <- unlist(
+      lapply(x, find_dependencies),
+      recursive = FALSE, use.names = FALSE
+    )
+  }
+  c(childDeps, deps)
+}
+
+discard_dependencies <- function(x) {
+  if (is_sass_bundle_like(x))  {
+    x <- as_sass_layer(x)
+    x$html_deps <- NULL
+  } else if (is_font_collection(x)) {
+    x$html_deps <- NULL
+  } else if (inherits(x, "html_dependency")) {
+    x <- NULL
+  } else {
+    htmlDependencies(x) <- NULL
+  }
+  if (is.list(x)) {
+    lapply(x, discard_dependencies)
+  } else {
+    x
+  }
 }
 
 as_sass_ <- function(input) {
@@ -95,12 +133,22 @@ as_sass_.list <- function(input) {
   collapse0(sass_vals)
 }
 
+as_sass_.font_collection <- function(input) {
+  if (isTRUE(input$default_flag)) {
+    paste(input$families, "!default")
+  } else {
+    input$families
+  }
+}
+
 as_sass_.sass_layer <- function(input) {
   # concatinate all sass layer content in order
   collapse0(
     c(
       # only collect non-null values
+      if (!is.null(input$functions)) as_sass_(input$functions),
       if (!is.null(input$defaults)) as_sass_(input$defaults),
+      if (!is.null(input$mixins)) as_sass_(input$mixins),
       if (!is.null(input$declarations)) as_sass_(input$declarations),
       if (!is.null(input$rules)) as_sass_(input$rules)
     )
@@ -129,11 +177,14 @@ as_sass_.character <- function(input) {
 #' Sass Import
 #'
 #' Create an import statement to be used within your Sass file. See
-#' \url{https://sass-lang.com/documentation/file.SASS_REFERENCE.html#import} for
+#' <https://sass-lang.com/documentation/file.SASS_REFERENCE.html#import> for
 #' more details.
 #'
-#' \code{sass_file} adds extra checks to make sure an appropriate file path
+#' `sass_file()` adds extra checks to make sure an appropriate file path
 #' exists given the input value.
+#'
+#' Note that the LibSass compiler expects .sass files to use the Sass Indented
+#' Syntax.
 #'
 #' @param input Character string to be placed in an import statement.
 #' @param quote Logical that determines if a double quote is added to the import

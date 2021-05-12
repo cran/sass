@@ -28,12 +28,22 @@ format.sass_bundle <- function(x, ...) {
 #' @noRd
 print.css <- function(x, ...) {
   cat0("/* CSS */\n", format(x), "\n") # nolint
+  deps <- htmlDependencies(x)
+  if (length(deps)) {
+    cat0("\n/* HTML Dependencies */\n")
+    utils::str(deps)
+  }
   invisible(x)
 }
 #' @export
 #' @noRd
 print.sass <- function(x, ...) {
   cat0("/* Sass */\n", format(x), "\n") # nolint
+  deps <- htmlDependencies(x)
+  if (length(deps)) {
+    cat0("\n/* HTML Dependencies */\n")
+    utils::str(deps)
+  }
   invisible(x)
 }
 #' @export
@@ -51,8 +61,7 @@ print.sass_layer <- function(
     "/* *** */\n"
   )
 
-
-  x_other <- x[setdiff(names(x), c("defaults", "declarations", "rules"))]
+  x_other <- x[c("html_deps", "file_attachments")]
   if (length(unlist(x_other)) > 0) {
     cat0("\nOther ", info_name, " information:\n")
     utils::str(x_other)

@@ -1,3 +1,25 @@
+# sass 0.4.0
+
+## Possibly breaking changes
+
+* `sass_layer()`'s argument order has changed to better accommodate for the addition of new `functions` and `mixins` arguments as well as deprecation of the `declarations` argument. This change reflects an update in our understanding of Sass best practice of placing function definitions before variables, so that variable definitions may leverage functions. (#80)
+
+* `sass()` and `as_sass()` now always attach `htmlDependency()`(s) (found inside of their `input` argument) as an attribute on their return value. This mainly in support the new font importing feature (which relies on `sass()`/`as_sass()` being able to return `htmlDependency()`s), but this could be more generally useful for attaching HTML dependencies to Sass/CSS code. (#74)
+
+## New features
+
+* Added new font importing helpers, namely `font_google()`, `font_link()`, `font_face()`, and `font_collection()` for intelligently importing web fonts files. They must be used inside a named list, for example: `list("font-variable" = font_google("Pacifico"))`. See `help(font_face, package = "sass")` for more details and examples. (#74)
+
+* A new `sass_layer_file()` function was added to read in a `.scss` file as a `sass_layer()`. Special comments of the form `/*-- scss:(functions|defaults|rules|mixins) --*/` can be used to place certain sections of the file into `functions`, `defaults`, `rules`, and `mixins`. The primary motivation for this is to allow [quarto's theme file format](https://github.com/quarto-dev/quarto-cli/blob/main/design/quarto-themes.md) to also be used Shiny and R Markdown. (#81)
+
+* Closed #87: Added new `sass_options_get()` and `sass_options_set()` for setting and reading `sass_options()` globally (`sass()`'s `options` argument now defaults to `sass_options_get()` instead of `sass_options()`). In addition, when `shiny::devmode()` is enabled, Sass source maps are included by default. (#88) 
+
+* `output_template()` gains a `path` argument to change the root directory where output file will be written. (#76)
+
+## Bug fixes
+
+* Closed #84: Fixed an issue with `sass_file()` being cached even if the contents of the file had changed (this regression was introduced by the 0.3.0 release). (#85)
+
 # sass 0.3.1
 
 This small patch release changes `sass::sass_cache_context_dir()` to use `tools::R_user_dir()` over `rappdirs::user_cache_dir()` (when relevant, as requested by CRAN). (#70)

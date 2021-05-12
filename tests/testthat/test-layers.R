@@ -1,5 +1,3 @@
-context("layers")
-
 # Disable sass cache
 local_disable_cache()
 
@@ -10,7 +8,7 @@ red <- list(color = "red !default")
 green <- list(color = "green !default")
 core <- sass_layer(
   defaults = blue,
-  declarations = "@function my_invert($color, $amount: 100%) {
+  functions = "@function my_invert($color, $amount: 100%) {
     $inverse: change-color($color, $hue: hue($color) + 180);
     @return mix($inverse, $color, $amount);
   }",
@@ -18,37 +16,16 @@ core <- sass_layer(
 )
 
 test_that("sass_layer is equivalent to sass", {
-  expect_equivalent(
+  expect_equal(
     sass(core),
-    sass(list(blue, "body { background-color: $color; color: yellow; }"))
+    sass(list(blue, "body { background-color: $color; color: yellow; }")),
+    ignore_attr = TRUE
   )
 })
 
 test_that("sass layer format", {
-  expect_equal(
-    format(core),
-    collapse0(c(
-      "$color: blue !default;",
-      "@function my_invert($color, $amount: 100%) {",
-      "    $inverse: change-color($color, $hue: hue($color) + 180);",
-      "    @return mix($inverse, $color, $amount);",
-      "  }",
-      "body { background-color: $color; color: my_invert($color); }"
-    ))
-  )
-  expect_equal(
-    utils::capture.output(print(core)),
-    c(
-      "/* Sass Bundle */",
-      "$color: blue !default;",
-      "@function my_invert($color, $amount: 100%) {",
-      "    $inverse: change-color($color, $hue: hue($color) + 180);",
-      "    @return mix($inverse, $color, $amount);",
-      "  }",
-      "body { background-color: $color; color: my_invert($color); }",
-      "/* *** */"
-    )
-  )
+  expect_snapshot(format(core))
+  expect_snapshot(core)
 
   layer1 <- sass_layer(
     file_attachments = c(
@@ -65,9 +42,10 @@ test_that("sass layer format", {
 
 test_that("sass_bundle() works as intended", {
   red_layer <- sass_layer(red, rules = ":root{ --color: #{$color}; }")
-  expect_equivalent(
+  expect_equal(
     sass(list(red, core, ":root{ --color: #{$color}; }")),
-    sass(sass_bundle(core, red_layer))
+    sass(sass_bundle(core, red_layer)),
+    ignore_attr = TRUE
   )
 })
 
@@ -245,4 +223,11 @@ test_that("write_file_attachments edge cases", {
       "c4/c1.txt", "c4/d/d1.txt"
     )
   )
+})
+
+
+
+test_that("sass_layer_file() basically works", {
+  f <- file.path(assets, "test-layer-file.scss")
+  expect_snapshot(str(sass_layer_file(f)))
 })
