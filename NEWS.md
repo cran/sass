@@ -1,9 +1,18 @@
+# sass 0.4.2
+
+## Bug fixes
+
+* `sass()` no longer encounters a false positive cache hit when `sass_file()` is used inside a `sass_bundle()`. (#107, #108)
+* `font_google()` no longer produces a directory name with a `_` prefix (which was causing the directory to be ignored when deployed to GitHub Pages). (#105, #106)
+
 # sass 0.4.1
 
 ## Improvements
 
 * Several speed improvements for `sass()` and `as_sass_layer()`, particularly when `sass(write_attachments = TRUE)` encounters a `cache` hit. (#98)
 * Removed compilation warnings with gcc-12. (#100)
+* Removed linking errors that occur when custom C++ flags are used to compile
+  (#94, #104).
 
 # sass 0.4.0
 
