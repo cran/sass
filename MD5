@@ -1,7 +1,7 @@
-8b81a3b0c0e0c9bfc35de1f2fdc9b012 *DESCRIPTION
+1af7af857de26f85c92bae53dca9dec2 *DESCRIPTION
 6822353c1488e71d808be624343c6c48 *LICENSE
 dda83fad3f672b2d1e276ce193b77271 *NAMESPACE
-4897e79c2e7ad2607ddfb034b5125817 *NEWS.md
+1be22e2bb5abfe99886dd4fc76019e0e *NEWS.md
 e9d466664b94fdc4b6c729030140c10c *R/as_html.R
 2d5ba48b42ae3890842fdb31fe3ae062 *R/as_sass.R
 99f9ab6c486665bd7d57cc6f86ebd212 *R/compile.R
@@ -17,10 +17,10 @@ ed19fcc89d31aaa18d9f46598bcc695e *R/sass.R
 4158b3339a21fed7ce27b9ce6564cafa *R/staticimports.R
 bd8fc757e340e947ce92f6c458072fa1 *R/utils.R
 0c6368268d8a8fe5f75e3bae571543f1 *README.md
-359f9005d610ffca14ebe872edc20d18 *build/vignette.rds
+951850ac51964c42c16d3ebf38d5a209 *build/vignette.rds
 d2dbe8a076687d51439f8573eb3b1865 *inst/doc/sass.R
 7166b61165c2711c85743c9597f97ffa *inst/doc/sass.Rmd
-63969df516faa00673c7e20944e3b2eb *inst/doc/sass.html
+4f0e264fd577606759426a7dda78db3d *inst/doc/sass.html
 eb75893d9dd425f54bf204f1e3cb59f5 *inst/examples/example-full.scss
 65dd49a134f546695cd693e320d3d294 *inst/examples/rules.scss
 df7fd1bc7e3dc7b461400d0c5d88ed81 *inst/examples/variables.scss
@@ -50,7 +50,7 @@ cff4557946eecaf29d777ae777c5c5ca *man/figures/sass-color.gif
 74c362907475d0d7f0d59d0fb662135c *man/figures/sass-logo-color.png
 86a651268a36b602e5c8c42da4d8f792 *man/font_face.Rd
 4087c2c0fb4f59ebdbb6e5909a65362b *man/output_template.Rd
-a3bc7250f5317ee48cb98fb71ae04e2f *man/sass-deprecated.Rd
+976148450dd1d9c4b6d4caf1e462c922 *man/sass-deprecated.Rd
 eac1ec683262d6bd50c019d7c4d2d466 *man/sass.Rd
 0162db8a548c7b9f8fb4bee64594e444 *man/sass_cache_context_dir.Rd
 509f8497cb6eb666589ccaf2c4edbbb9 *man/sass_cache_get.Rd
@@ -58,7 +58,7 @@ c3511ef317c071d8ff69d52bcce8a23f *man/sass_cache_get_dir.Rd
 e338af47c74e416d1a1be19325bde1be *man/sass_cache_options.Rd
 13a499ec79b6564e19f430d31388f07a *man/sass_file_cache.Rd
 35af874a296af6953d18943b5ff6c7fe *man/sass_import.Rd
-3ff4cbee6780f68dd83d6a84c4f73c73 *man/sass_layer.Rd
+d8bbb0217f53baa323292696d45802a7 *man/sass_layer.Rd
 e2169a48e62723d7cf6924d2718db31e *man/sass_options.Rd
 b14a6970b2d3ba7ab240c823f6685b8c *man/sass_partial.Rd
 22bfef89aacde03c9bb7999027c41e78 *man/write_file_attachments.Rd
@@ -81,6 +81,7 @@ b0a532558881411c649d1c429516e294 *src/libsass/configure.ac
 55342d92ab43b952257664ab40e5a89c *src/libsass/contrib/libsass.spec
 e8a826eba8311f4e9058c3bf0903a1d2 *src/libsass/contrib/plugin.cpp
 12e08374275ecbc6ec62e38b8d3988e2 *src/libsass/docs/README.md
+468b5c3384d51dc06ff672428bb71843 *src/libsass/docs/allocator.md
 119827b38fb9ad1c4a75120eaf044df7 *src/libsass/docs/api-context-example.md
 4a42c1ee038729ff86504c27aac50192 *src/libsass/docs/api-context-internal.md
 8e751d02855da43a27fe25f046d79ed1 *src/libsass/docs/api-context.md
@@ -107,6 +108,7 @@ a775227ff25d0be980d5cbc16e8024b4 *src/libsass/docs/build-with-autotools.md
 3cee8ab5cdf753ae46d368694bbbf5a9 *src/libsass/docs/custom-functions-internal.md
 1cd0d74c4a229eb0dad0f7584cd4b2b8 *src/libsass/docs/dev-ast-memory.md
 1a0805ef2c0f485d8395a866153ec7f6 *src/libsass/docs/dev-profiling.md
+dbdb3f50ec45c5c6eddad913b1044c21 *src/libsass/docs/developing.md
 e4e616edd051df1c51225e2b10898864 *src/libsass/docs/implementations.md
 79230671e819462466e1189bcbcbf6d0 *src/libsass/docs/plugins.md
 adfe88650c214954ecf152b2208fd511 *src/libsass/docs/setup-environment.md
@@ -215,7 +217,7 @@ fae7bbd34a9d85afdc89d979069279a5 *src/libsass/src/fn_utils.cpp
 d3cdfbfb6078f9f22258e6ffb4f1950b *src/libsass/src/fn_utils.hpp
 dd4356ac73a1c84f46d5414aa9cda4bb *src/libsass/src/inspect.cpp
 25c2f70cbee578cb927bc945bae14413 *src/libsass/src/inspect.hpp
-9be90a13c0b6ccef7f0b6b5a2bdaac11 *src/libsass/src/json.cpp
+0787e1709f0c6d45f117b2ca6460e88b *src/libsass/src/json.cpp
 b3f3a9fb61311812203dc2487da1c4ae *src/libsass/src/json.hpp
 4c6ea35987298847cd1b2d0327944a09 *src/libsass/src/kwd_arg_macros.hpp
 4396acd535a10e4c5f1df82e521abe2c *src/libsass/src/lexer.cpp

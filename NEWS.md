@@ -1,3 +1,9 @@
+# sass 0.4.3
+
+## Improvements
+
+* Close #113: Get rid of C++ warning during package installation about sprintf() being deprecated
+
 # sass 0.4.2
 
 ## Bug fixes
