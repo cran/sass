@@ -1,7 +1,7 @@
-1af7af857de26f85c92bae53dca9dec2 *DESCRIPTION
+a925ab0fb9dfedc4b8a923569778a17a *DESCRIPTION
 6822353c1488e71d808be624343c6c48 *LICENSE
 dda83fad3f672b2d1e276ce193b77271 *NAMESPACE
-1be22e2bb5abfe99886dd4fc76019e0e *NEWS.md
+6cd80199d37d55a9e1921f611c5da9fe *NEWS.md
 e9d466664b94fdc4b6c729030140c10c *R/as_html.R
 2d5ba48b42ae3890842fdb31fe3ae062 *R/as_sass.R
 99f9ab6c486665bd7d57cc6f86ebd212 *R/compile.R
@@ -20,7 +20,7 @@ bd8fc757e340e947ce92f6c458072fa1 *R/utils.R
 951850ac51964c42c16d3ebf38d5a209 *build/vignette.rds
 d2dbe8a076687d51439f8573eb3b1865 *inst/doc/sass.R
 7166b61165c2711c85743c9597f97ffa *inst/doc/sass.Rmd
-4f0e264fd577606759426a7dda78db3d *inst/doc/sass.html
+90acb5d6ffe17aec5ce7fc0d67bb162a *inst/doc/sass.html
 eb75893d9dd425f54bf204f1e3cb59f5 *inst/examples/example-full.scss
 65dd49a134f546695cd693e320d3d294 *inst/examples/rules.scss
 df7fd1bc7e3dc7b461400d0c5d88ed81 *inst/examples/variables.scss
@@ -62,8 +62,8 @@ d8bbb0217f53baa323292696d45802a7 *man/sass_layer.Rd
 e2169a48e62723d7cf6924d2718db31e *man/sass_options.Rd
 b14a6970b2d3ba7ab240c823f6685b8c *man/sass_partial.Rd
 22bfef89aacde03c9bb7999027c41e78 *man/write_file_attachments.Rd
-49f1954b7e2fba1ab41b95f716d4202e *src/Makevars
-49f1954b7e2fba1ab41b95f716d4202e *src/Makevars.win
+9582bf12065f2dcb026f130d752253e1 *src/Makevars
+9582bf12065f2dcb026f130d752253e1 *src/Makevars.win
 dd9a7b5a779f94dbd2a76178c55d8d3e *src/compile.c
 136f57360a20c60ec2a18bfe2322c1f4 *src/compile.h
 0af6d9c764b95effd83ccf24614bfc3e *src/init.cpp
