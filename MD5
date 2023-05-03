@@ -1,7 +1,7 @@
-48df6a39969df99bcd2d23d62dce57b1 *DESCRIPTION
+5965d01a2f03f5ccac1b8793065d79e9 *DESCRIPTION
 6822353c1488e71d808be624343c6c48 *LICENSE
 dda83fad3f672b2d1e276ce193b77271 *NAMESPACE
-c34dfa3b7e71714726c2651f42829b7d *NEWS.md
+c79e41641cea461dde12b2e6ac149735 *NEWS.md
 e9d466664b94fdc4b6c729030140c10c *R/as_html.R
 2d5ba48b42ae3890842fdb31fe3ae062 *R/as_sass.R
 99f9ab6c486665bd7d57cc6f86ebd212 *R/compile.R
@@ -20,7 +20,7 @@ bd8fc757e340e947ce92f6c458072fa1 *R/utils.R
 951850ac51964c42c16d3ebf38d5a209 *build/vignette.rds
 d2dbe8a076687d51439f8573eb3b1865 *inst/doc/sass.R
 7166b61165c2711c85743c9597f97ffa *inst/doc/sass.Rmd
-d6a379463fec6684611ef370d14bbbe4 *inst/doc/sass.html
+fbcf175456a3132887283359cf804a0e *inst/doc/sass.html
 eb75893d9dd425f54bf204f1e3cb59f5 *inst/examples/example-full.scss
 65dd49a134f546695cd693e320d3d294 *inst/examples/rules.scss
 df7fd1bc7e3dc7b461400d0c5d88ed81 *inst/examples/variables.scss
@@ -81,7 +81,6 @@ b0a532558881411c649d1c429516e294 *src/libsass/configure.ac
 55342d92ab43b952257664ab40e5a89c *src/libsass/contrib/libsass.spec
 e8a826eba8311f4e9058c3bf0903a1d2 *src/libsass/contrib/plugin.cpp
 12e08374275ecbc6ec62e38b8d3988e2 *src/libsass/docs/README.md
-468b5c3384d51dc06ff672428bb71843 *src/libsass/docs/allocator.md
 119827b38fb9ad1c4a75120eaf044df7 *src/libsass/docs/api-context-example.md
 4a42c1ee038729ff86504c27aac50192 *src/libsass/docs/api-context-internal.md
 8e751d02855da43a27fe25f046d79ed1 *src/libsass/docs/api-context.md
@@ -108,7 +107,6 @@ b4cf8d1e9f04f51494f702b4e09b73b7 *src/libsass/docs/build.md
 3cee8ab5cdf753ae46d368694bbbf5a9 *src/libsass/docs/custom-functions-internal.md
 1cd0d74c4a229eb0dad0f7584cd4b2b8 *src/libsass/docs/dev-ast-memory.md
 1a0805ef2c0f485d8395a866153ec7f6 *src/libsass/docs/dev-profiling.md
-dbdb3f50ec45c5c6eddad913b1044c21 *src/libsass/docs/developing.md
 9980aae35ad655d328e38956e9b6429f *src/libsass/docs/implementations.md
 79230671e819462466e1189bcbcbf6d0 *src/libsass/docs/plugins.md
 adfe88650c214954ecf152b2208fd511 *src/libsass/docs/setup-environment.md
@@ -231,7 +229,7 @@ dfc2058f0199ec163d4c8a3544ddb365 *src/libsass/src/memory/allocator.hpp
 7cfe586e76efe51e4d01507ac5e65e92 *src/libsass/src/memory/config.hpp
 8408f63674cfeb31c655d8be9ddf353d *src/libsass/src/memory/memory_pool.hpp
 7420c6d1f13aa485f98743b26c68ead6 *src/libsass/src/memory/shared_ptr.cpp
-f905d8a13f9a630fcba718e77d29fb49 *src/libsass/src/memory/shared_ptr.hpp
+cad580fdce24a216d7012b8ba83e5cb9 *src/libsass/src/memory/shared_ptr.hpp
 f33b519e93100ea55bb9acfe06b94610 *src/libsass/src/operation.hpp
 c66d0df9049f425f2e290b68d6f9b8ca *src/libsass/src/operators.cpp
 9700983e6340a13af249ba6f111e0ce5 *src/libsass/src/operators.hpp
