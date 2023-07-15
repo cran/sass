@@ -1,7 +1,7 @@
-5965d01a2f03f5ccac1b8793065d79e9 *DESCRIPTION
+f5134bc99688ba6c4a48f5ecce62b93b *DESCRIPTION
 6822353c1488e71d808be624343c6c48 *LICENSE
 dda83fad3f672b2d1e276ce193b77271 *NAMESPACE
-c79e41641cea461dde12b2e6ac149735 *NEWS.md
+f9c7b456fc6bb00b535d67dc05fcedeb *NEWS.md
 e9d466664b94fdc4b6c729030140c10c *R/as_html.R
 2d5ba48b42ae3890842fdb31fe3ae062 *R/as_sass.R
 99f9ab6c486665bd7d57cc6f86ebd212 *R/compile.R
@@ -16,11 +16,11 @@ ed19fcc89d31aaa18d9f46598bcc695e *R/sass.R
 9a740556e85fb89334e098a52c9b3440 *R/shiny_devmode.R
 4158b3339a21fed7ce27b9ce6564cafa *R/staticimports.R
 bd8fc757e340e947ce92f6c458072fa1 *R/utils.R
-0c6368268d8a8fe5f75e3bae571543f1 *README.md
+d1f9e392c5be709f46fc96d0b72db6c7 *README.md
 951850ac51964c42c16d3ebf38d5a209 *build/vignette.rds
 d2dbe8a076687d51439f8573eb3b1865 *inst/doc/sass.R
 7166b61165c2711c85743c9597f97ffa *inst/doc/sass.Rmd
-fbcf175456a3132887283359cf804a0e *inst/doc/sass.html
+517a351f17d5ec2be4729ca7a51b1d61 *inst/doc/sass.html
 eb75893d9dd425f54bf204f1e3cb59f5 *inst/examples/example-full.scss
 65dd49a134f546695cd693e320d3d294 *inst/examples/rules.scss
 df7fd1bc7e3dc7b461400d0c5d88ed81 *inst/examples/variables.scss
@@ -72,7 +72,7 @@ e8aec565e92115fadefe700a58fa7e8c *src/libsass/CODE_OF_CONDUCT.md
 815d3865e88b461e43377924a2780fa5 *src/libsass/GNUmakefile.am
 a7e5d309eee1ec8a1a1392dca91a8beb *src/libsass/INSTALL
 2f8a76980411a3f1f1480b141ce06744 *src/libsass/LICENSE
-8c22b3d2657dc9fa52d421c6ec6f5cf3 *src/libsass/Makefile
+2bf2809c69828218a95d6147fce6544a *src/libsass/Makefile
 7546e6af3e432c7422be0e15d3947280 *src/libsass/Makefile.conf
 07019dd986f23d6df0b3fd82df7c3653 *src/libsass/Readme.md
 8a3fbab9563566ab7bf183b1691ee092 *src/libsass/SECURITY.md
