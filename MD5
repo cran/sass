@@ -1,13 +1,13 @@
-dfe942f2a9cd929d40fbb95890c583ef *DESCRIPTION
+bbb824064e415a09ff61b204733b0f1c *DESCRIPTION
 6822353c1488e71d808be624343c6c48 *LICENSE
 dda83fad3f672b2d1e276ce193b77271 *NAMESPACE
-f6291b820d2a7716c23003b3a875be66 *NEWS.md
+fae584c25021f297a8934b5074a746a8 *NEWS.md
 e9d466664b94fdc4b6c729030140c10c *R/as_html.R
 2d5ba48b42ae3890842fdb31fe3ae062 *R/as_sass.R
 99f9ab6c486665bd7d57cc6f86ebd212 *R/compile.R
 85f12cd8bcbb88393696564a78a30c74 *R/deprecated.R
 bc55d86876e3e280a81c1faa7c910a9b *R/file_cache.R
-f1b2bf6fc6f15b2a73a583d4f5e875dd *R/fonts.R
+c0816716a5d9e98645f651b916c6c248 *R/fonts.R
 a355e0557f2d48e0549e9f1811fbcf79 *R/format.R
 4631d887a967589a8798a8c6db038cfb *R/layers.R
 df2097ed9c95030aac0da5689571b56f *R/options.R
@@ -19,8 +19,8 @@ bd8fc757e340e947ce92f6c458072fa1 *R/utils.R
 d1f9e392c5be709f46fc96d0b72db6c7 *README.md
 b30cdeff20cb3615618927f003e6ad05 *build/vignette.rds
 862b3b60e26887fa3be6fa626c0c00c4 *inst/doc/sass.R
-7166b61165c2711c85743c9597f97ffa *inst/doc/sass.Rmd
-1e1008ced586a279fa916c562d6b9f6a *inst/doc/sass.html
+e5c92a072819de7f42f63788d115d0b9 *inst/doc/sass.Rmd
+badf78af79cb07b6f5f8765962ea8fd4 *inst/doc/sass.html
 eb75893d9dd425f54bf204f1e3cb59f5 *inst/examples/example-full.scss
 65dd49a134f546695cd693e320d3d294 *inst/examples/rules.scss
 df7fd1bc7e3dc7b461400d0c5d88ed81 *inst/examples/variables.scss
@@ -48,7 +48,7 @@ cbd541e94819353b53c42d7ed4c5d4fe *man/FileCache.Rd
 5576f34cd97cdff6e3425cefc8ace2e6 *man/figures/logo.svg
 cff4557946eecaf29d777ae777c5c5ca *man/figures/sass-color.gif
 74c362907475d0d7f0d59d0fb662135c *man/figures/sass-logo-color.png
-86a651268a36b602e5c8c42da4d8f792 *man/font_face.Rd
+c26f2183babbe9455fe357ae3d3682e7 *man/font_face.Rd
 4087c2c0fb4f59ebdbb6e5909a65362b *man/output_template.Rd
 976148450dd1d9c4b6d4caf1e462c922 *man/sass-deprecated.Rd
 eac1ec683262d6bd50c019d7c4d2d466 *man/sass.Rd
@@ -229,7 +229,7 @@ dfc2058f0199ec163d4c8a3544ddb365 *src/libsass/src/memory/allocator.hpp
 7cfe586e76efe51e4d01507ac5e65e92 *src/libsass/src/memory/config.hpp
 8408f63674cfeb31c655d8be9ddf353d *src/libsass/src/memory/memory_pool.hpp
 7420c6d1f13aa485f98743b26c68ead6 *src/libsass/src/memory/shared_ptr.cpp
-cad580fdce24a216d7012b8ba83e5cb9 *src/libsass/src/memory/shared_ptr.hpp
+8980dcadafd72d7ca2475263ca9e9fbb *src/libsass/src/memory/shared_ptr.hpp
 f33b519e93100ea55bb9acfe06b94610 *src/libsass/src/operation.hpp
 c66d0df9049f425f2e290b68d6f9b8ca *src/libsass/src/operators.cpp
 9700983e6340a13af249ba6f111e0ce5 *src/libsass/src/operators.hpp
@@ -295,7 +295,7 @@ c70ef95f24eda55b8a8d6a5a07a661e6 *src/libsass/win/libsass.targets
 cdec5d7e13bdbd99ea52d2744aea87d9 *tests/testthat.R
 24c2f254bef9d62fd0857daf2b553f32 *tests/testthat/_reset.scss
 793a7471530387e6f250337ef0efbb49 *tests/testthat/_snaps/font-objects.md
-ee42ad27477dd4b1dabb2fd41be25c31 *tests/testthat/_snaps/font-objects/font-css
+ac0ef34b27fabf9882b07cb5956d50bd *tests/testthat/_snaps/font-objects/font-css
 e0f869db5483437f51a8f2537ffa2faf *tests/testthat/_snaps/html-dependencies.md
 3ad41e37264596bda1e2dde5477adeed *tests/testthat/_snaps/layers.md
 a8e4638578c71e1131e7499cb3e36410 *tests/testthat/_snaps/utils.md
@@ -312,7 +312,7 @@ e5f5187c2abe31d61473e2d508e858b6 *tests/testthat/test-cache.R
 4b47d6b22d6c46e98de5ab7b1e8bf1d0 *tests/testthat/test-compile.scss
 c856c0f4ee4784c6e03232dc5e88aea0 *tests/testthat/test-extend.R
 71b986fc3fcfcf9fe48207491ca86002 *tests/testthat/test-extend.scss
-93db5c3043abb2c090b1b4d9b934f4f8 *tests/testthat/test-font-objects.R
+45b2d0367161a143e6f98220be3b803f *tests/testthat/test-font-objects.R
 4d2832bc43d2ef79f4611caf86490156 *tests/testthat/test-html-dependencies.R
 08fb5bdf5bf33ad6b7407521bacf4bfc *tests/testthat/test-import.R
 cec7a7de306b7f71b5f21b3afb8a0c9f *tests/testthat/test-import.scss
@@ -344,4 +344,4 @@ d8f280c9439fe02532e93bf4303b4d8c *vignettes/color-contrast.scss
 a5e09af06ef339a31a034a66d30d651a *vignettes/hello-pacifico.png
 afb023459979734f5d6111df34f91ed6 *vignettes/my-style.png
 08c33871a2a6d4bd800ee1cc7ca1f5b6 *vignettes/my-style.scss
-7166b61165c2711c85743c9597f97ffa *vignettes/sass.Rmd
+e5c92a072819de7f42f63788d115d0b9 *vignettes/sass.Rmd
